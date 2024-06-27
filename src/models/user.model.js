@@ -28,7 +28,7 @@ const userSchema =new Schema(
         type:String,
         required:true
     },
-    coverimg:{
+    coverImage:{
         type:String
     },
     watchHistory:[
@@ -50,7 +50,7 @@ const userSchema =new Schema(
 )
 
 userSchema.pre("save", async function(next){
-    if(!this.isModified(password)) return next();
+    if(!this.isModified("password")) return next();
     this.password= await bcrypt.hash(this.password,8)
     next()
 })
@@ -78,4 +78,4 @@ userSchema.methods.generateRefreshToken= function(){
 }
 
 
-export const UserSchema =mongoose.model("User",userSchema)
+export const User = mongoose.model("User",userSchema)
